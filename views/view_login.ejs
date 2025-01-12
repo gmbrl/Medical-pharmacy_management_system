@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/assets/bootstrap.min.css">
+    <title><%= title %></title>
+</head>
+<body>
+<br><br><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h3 class="text-center">Pharmacy Login Panel</h3>
+            <hr>
+            <span class="text-center">
+                <!-- <p>User: admin / Pass: admin #-# User: staff / Pass: staff</p> -->
+            </span>
+            <hr>
+            <br>
+            <form method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                </div>
+                <input type="submit" class="btn btn-default btn-block" name="submit" value="Login" style="background-color: red; color: white;">
+            </form>
+            
+            <% include inc/alert_msg.ejs %>
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>

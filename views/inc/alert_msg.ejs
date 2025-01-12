@@ -1,0 +1,25 @@
+<br><br>
+
+<!-- alert box -->
+<% if (message) { %>
+    <div class="alert <%= message_type %>">
+        <strong><%= message %></strong>
+    </div>
+    <% } %>
+        <!-- end of alert box -->
+
+        <!-- error alert box -->
+        <% if (errors) { %>
+            <ul style="padding-left: 0">
+                <% errors.forEach(function(err){ %>
+                    <!-- alert box -->
+                    <li style="list-style: none;">
+                        <div class="alert alert-danger">
+                            <strong><%= err.msg %></strong>
+                        </div>
+                    </li>
+                    <!-- end of alert box -->
+                    <% }) %>
+            </ul>
+            <% } %>
+                <!-- error alert box-end -->

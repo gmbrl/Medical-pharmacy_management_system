@@ -1,0 +1,368 @@
+<% include inc/view_header %>
+    <% include inc/view_topmenu %>
+        <% include inc/view_sidebar %>
+
+            <div id="page-wrapper">
+
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header text-center">
+                                New Sales Entry
+                            </h1>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-striped" id="mainTable">
+                                <thead>
+                                    <tr>
+                                        <th>Batch ID</th>
+                                        <th>Medicine Name</th>
+                                        <th>Quantity</th>
+                                        <th>Cost Price</th>
+                                        <th>Sell Price</th>
+                                        <th>Production Date</th>
+                                        <th>Expire Date</th>
+                                        <th>Supplier Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% batch.forEach(function(item){ %>
+                                        <tr>
+                                            <td>
+                                                <%= item.Batch_ID %>
+                                            </td>
+                                            <td>
+                                                <%= item.Medicine_Name %>
+                                            </td>
+                                            <td>
+                                                <%= item.Quantity %>
+                                            </td>
+                                            <td>
+                                                <%= item.Cost_Price %>
+                                            </td>
+                                            <td>
+                                                <%= item.Sell_Price %>
+                                            </td>
+                                            <td>
+                                                <%= item.Production_Date %>
+                                            </td>
+                                            <td>
+                                                <%= item.Expire_Date %>
+                                            </td>
+                                            <td>
+                                                <%= item.Supplier_Name %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+
+                        <form action="" method="POST">
+                            <div class="col-lg-5 col-lg-offset-3">
+                                <div class="form-group">
+                                    <label for="invoice_number">Invoice Number</label>
+                                    <input type="text" class="form-control" id="invoice_number" name="invoice_number" placeholder="Invoice Name" required>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="entry_date">Entry Date</label>
+                                    <input type="text" class="form-control" name="entry_date" id="entry_date" onkeydown="return false" required>
+                                </div>
+                            </div>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Medicine Name</th>
+                                    <th>Quantity</th>
+                                    <th>Sell Price</th>
+                                    <th>Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="getMedicineName" name="typeahead" class="typeahead tt-query form-control" autocomplete="off" spellcheck="false" placeholder="Enter Product Name" />
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" id="getQuantity" class="form-control"/>
+                                        <td>
+                                            <input type="number" min="0" id="getSellPrice" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <input type="text" id="getAmount" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <input type="button" id="btnAdd" value="Add to list" class="btn dark-blue" />
+                                        </td>
+                                </tr>
+                            </table>
+                    </div>
+
+                    <div style=" background-color:#34495e; color:white; padding:10px;">Purchase Items List</div>
+                    <div id="orderItems" style="height:260px; overflow-y:scroll; border:1px solid #BFAEAE;">
+                    </div>
+                    <div align="right">
+                        <br />
+                        <button type="button" id="btnNext" class="btn dark-blue btn-block">
+                              Proceed to Checkout
+                          </button>
+                    </div>
+                    <br />
+                    <br />
+
+                    <div class="col-lg-5 col-lg-offset-3">
+
+                        <div class="form-group">
+                            <label for="totalAmount">Total Amount</label>
+                            <input type="text" class="form-control" id="totalAmount" name="totalAmount" placeholder="Total Amount" required>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="discount">Discount(%)</label>
+                            <input type="text" class="form-control" id="discount" name="discount" placeholder="Discount" required>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="discountAmount">Discount Amount</label>
+                            <input type="text" class="form-control" id="discountAmount" name="discountAmount" placeholder="Discount Amount" required>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="totalPayable">Total Payable</label>
+                            <input type="text" class="form-control" id="totalPayable" name="totalPayable" placeholder="Total Payable" required>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="paid">Paid</label>
+                            <input type="text" class="form-control" id="paid" name="paid" placeholder="Paid" required>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="return">Return</label>
+                            <input type="text" class="form-control" id="return" name="return" placeholder="Return" required>
+
+                        </div>
+                        <br />
+                        <br />
+
+                        <input type="submit" class="btn btn-success btn-block" name="submit" value="Submit New Sell">
+                    </div>
+
+                    </form>
+                </div>
+
+                <hr>
+
+            </div>
+            <!-- /.container-fluid -->
+
+
+            </div>
+            <!-- /#page-wrapper -->
+
+            <% include inc/view_footer.ejs %>
+
+
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $('input.typeahead').typeahead({
+                        name: 'medicine',
+                        remote: 'http://localhost:5000/search?key=%QUERY',
+                        limit: 25
+                    });
+                });
+                </script>
+
+                <script>
+                    $("#getMedicineName").keyup(function () {
+                        $.ajax({
+                            url: "/admin/medicineSearch/",
+                            data: $('#getMedicineName').val(),
+                            success: function (result) {
+                                $("#getMedicineName").val(result);
+                            }
+                        });
+                    });
+
+                    document.getElementById('mainTable').onclick = function (event) {
+                        event = event || window.event;
+                        var target = event.target || event.srcElement;
+                        while (target && target.nodeName != 'TR') {
+                            target = target.parentElement;
+                        }
+                        var cells = target.cells;
+                        if (!cells.length || target.parentNode.nodeName == 'THEAD') {
+                            return;
+                        }
+                        $(function () {
+                            $('#getMedicineName').val($.trim(cells[1].innerHTML));
+                            $('#getSellPrice').val($.trim(cells[4].innerHTML));
+                        });
+                        //clears quantity and amount field
+                        $('#getQuantity').val('');
+                        $('#getAmount').val('');
+                        //focuses cursor on Qty field
+                        document.getElementById('getQuantity').focus();
+                    }
+
+
+                    //Calculate Amount based on input Quantity
+                    $('#getQuantity').keyup(function () {
+                        var available = Number($('#getAvailability').val());
+                        var quantity = Number($('#getQuantity').val());
+                        var sellPrice = Number($('#getSellPrice').val());
+                        if (quantity > available) {
+                            $('#getQuantity').val(available);
+                            quantity = available;
+                        }
+                        var amount = (quantity * sellPrice).toFixed(2);
+                        $('#getAmount').val(amount);
+                    });
+
+
+                    //Calculate Amount based on input Sell Price
+                    $('#getSellPrice').keyup(function () {
+                        var available = Number($('#getAvailability').val());
+                        var quantity = Number($('#getQuantity').val());
+                        var sellPrice = Number($('#getSellPrice').val());
+                        if (quantity > available) {
+                            $('#getQuantity').val(available);
+                            quantity = available;
+                        }
+                        var amount = (quantity * sellPrice).toFixed(2);
+                        $('#getAmount').val(amount);
+                    });
+
+
+                    //Calculate Amount based on input Sell Price
+                    $('#getAmount').focus(function () {
+                        var available = Number($('#getAvailability').val());
+                        var quantity = Number($('#getQuantity').val());
+                        var sellPrice = Number($('#getSellPrice').val());
+                        if (quantity > available) {
+                            $('#getQuantity').val(available);
+                            quantity = available;
+                        }
+                        var amount = (quantity * sellPrice).toFixed(2);
+                        $('#getAmount').val(amount);
+                    });
+
+
+
+                    var purchaseItems = [];
+                    //Adding items to sales items
+                    $('#btnAdd').on('click', function () {
+
+                        if ($('#getQuantity').val() == '' || $('#getQuantity').val() == 0 || !$.isNumeric($(
+                                '#getQuantity').val())) {
+                            alert('Please Enter Quantity!');
+                        }else if ($('#getSellPrice').val() == '' || $('#getSellPrice').val() == 0 || !$.isNumeric($(
+                                '#getSellPrice').val())) {
+                                alert('Please Enter Sell Price!');
+                        }else if ($('#getMedicineName').val() == '' || $('#getMedicineName').val() == 0) {
+                                alert('Please Enter Medicine Name!');
+                        }else if ($('#getAmount').val() == '' || $('#getAmount').val() == 0 || !$.isNumeric($(
+                                '#getAmount').val())) {
+                                alert('Not A Valid Amount!');
+                        }
+                        else {
+                            purchaseItems.push({
+                                Medicine_Name: $('#getMedicineName').val(),
+                                Quantity: $('#getQuantity').val(),
+                                Cost: $('#getSellPrice').val(),
+                                Amount: $('#getAmount').val()
+                            });
+
+                            if (purchaseItems.length > 0) {
+                                var $table = $('<table class="table table-bordered" id="mytable" border="1" cellpadding="10"/>');
+                                $table.append(
+                                    '<thead><tr><th>Medicine Name</th><th>Quantity</th><th>Rate</th><th>Amount</th></tr></thead>'
+                                );
+                                var $tbody = $('<tbody/>');
+
+                                $.each(purchaseItems, function (i, val) {
+                                    var $row = $('<tr class="salesItemsRows"/>');
+                                    $row.append($('<td />').html(val.Medicine_Name));
+                                    $row.append($('<td class="tdQuantity"/>').html(val.Quantity));
+                                    $row.append($('<td class="tdSellPrice"/>').html(val.Cost));
+                                    $row.append($('<td/>').html(val.Amount));
+                                    $tbody.append($row);
+                                });
+                                $table.append($tbody);
+                                $('#orderItems').html($table);
+
+                                $(function () {
+                                    $clear = '';
+                                    $('#getMedicineName').val('');
+                                    $('#getQuantity').val('');
+                                    $('#getSellPrice').val('');
+                                    $('#getAmount').val('');
+                                });
+                            } else {
+                                alert("List is empty !");
+                            }
+                        }
+
+                    });
+
+
+                    $('#btnNext').on('click', function () {
+
+                        var isAllValid = true;
+
+                        if (purchaseItems.length == 0) {
+                            isAllValid = false;
+                            alert('Please Add items to purchase!');
+                        } else {
+                            var subTotal = 0;
+                            var total = 0;
+                            $('#totalAmount').val('');
+                            $('#discount').val('');
+                            $('#totalPayable').val('');
+
+                            $('#mytable tr').each(function () {
+                                var quantity = $.trim($(this).find(".tdQuantity").html());
+                                var sellPrice = $.trim($(this).find(".tdSellPrice").html());
+                                total = Number(quantity) * Number(sellPrice);
+                                subTotal += total;
+                            });
+
+                            $('#totalAmount').val(subTotal);
+                            $('#totalPayable').val(subTotal);
+                        }
+                    });
+
+
+                    //For calculating  Grand Total after the Discount Percentage
+                    $('#discount').keyup(function () {
+                        var amount = Number($('#totalAmount').val());
+                        var discount = Number($('#discount').val());
+
+                        var discountAmount = (amount * discount) / 100;
+                        var totalPayable = (amount - discountAmount).toFixed(2);
+                        $('#discountAmount').val(discountAmount);
+                        $('#totalPayable').val(totalPayable);
+
+                        $('#paid').keyup(function () {
+
+                            var paid = Number($('#paid').val());
+
+                            var returned = (paid - totalPayable).toFixed(2);
+
+                            $('#return').val(returned);
+                        });
+                    });
+                </script>

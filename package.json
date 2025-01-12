@@ -1,0 +1,27 @@
+{
+  "name": "pharmacy-management-system",
+  "version": "1.0.0",
+  "description": "Pharmacy Management System",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^2.6.4",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
+    "ejs": "^2.7.4",
+    "express": "^4.21.2",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.18.1",
+    "express-validator": "^3.2.1",
+    "http": "^0.0.1-security",
+    "moment": "^2.30.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.12.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ATP3-Project",
+  "license": "Public"
+}
